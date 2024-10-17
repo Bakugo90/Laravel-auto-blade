@@ -1,0 +1,25 @@
+{
+  "name": "laravel-auto-blade",
+  "displayName": "Laravel-auto-blade",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "php",
+      "aliases": ["php", "php"],
+      "extensions": [".php",".blade.php"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "php",
+      "scopeName": "",
+      "path": "./syntaxes/php.tmLanguage.json"
+    }]
+  }
+}
