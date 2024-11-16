@@ -74,7 +74,6 @@ We expect all contributors to adhere to the [Contributor Covenant Code of Conduc
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## Contact
-
 If you have any questions or need further assistance, feel free to open an issue or contatct me at <souroagorouko@gmail.com>.
 
 Happy coding!
