@@ -15,7 +15,7 @@
     "commands": [
       {
         "command": "autoblade.helloWorld",
-        "title": "Hello World"
+        "title": "Auto Blade"
       }
     ]
   },

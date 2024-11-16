@@ -1,0 +1,40 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build output
+out/
+
+# Ignore TypeScript compiled files
+*.js
+*.js.map
+
+# Ignore VS Code settings
+.vscode/
+.vscode-test.mjs
+.vscodeignore
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore environment variables
+.env
+
+# Ignore coverage reports
+coverage/
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific files
+.idea/
+*.iml
+
+# Ignore other config files
+tsconfig.json
+eslint.config.mjs

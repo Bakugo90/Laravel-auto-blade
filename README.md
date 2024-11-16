@@ -7,22 +7,33 @@ Welcome to the Laravel Auto blade VS Code Extension! This extension is designed 
 ## Features
 
 - Automatically convert `.html` files to `.blade.php` files.
-- Update asset links to use Laravel's `asset()` helper function.
+- Automatically update all necessary HTML content to use Laravel's `asset()` helper function, ensuring that the Blade file runs correctly without errors..
 - Enhance Laravel development workflow within VS Code.
 
-## Installation
+## Installation and Usage
 
-**Note:** This extension is currently under development. Once published, you will be able to install it using the following steps:
+**Note:** This extension is currently under development. To test and use the extension locally, follow these steps:
 
-1. Open VS Code.
-2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window.
-3. Search for "Laravel Blade Converter".
-4. Click Install.
+1. **Clone the repository**: Clone the repository to your local machine using:
+   ```sh
+   git clone https://github.com/your-username/laravel-blade-converter.git
 
-## Usage
+2. **Open the `/autoblade` folder**: Be sure to open the `/autoblade` folder inside the cloned repository with VS Code.
+    ```sh	
+    cd laravel-blade-converter/autoblade
+    code .
 
-1. Open any `.html` file in your VS Code workspace.
-2. The extension will automatically convert the file to a `.blade.php` file and update asset links.
+3. **Install dependencies**: Run `npm install` to install the necessary dependencies.
+
+4. **Run the extension**: Press `F5` to open a new VS Code window with the extension loaded.
+
+5. **Test the extension**: Press ``ctrl+shift+p`` to open the command palette and type `Auto Blade` to convert the current opened HTML file to a Blade template.
+
+<!-- ## Usage
+
+This extension is currently under development -->
+<!-- 1. Open any `.html` file in your VS Code workspace.
+2. The extension will automatically convert the file to a `.blade.php` file and update asset links. -->
 
 ## Community Guidelines
 
@@ -50,6 +61,8 @@ We welcome contributions from everyone. Here’s how you can get started:
 For those new to VS Code extension development, here are some useful guides to get you started:
 
 - [Visual Studio Code Extension API](https://code.visualstudio.com/api)
+    The visual studio code API allow you to interact with the vscode editor and its native features and behaviors.
+    It is the utimate guide to creating vscode extensions. Really encourage you guys to get a look at it.
 - [Your First Extension](https://code.visualstudio.com/api/get-started/your-first-extension)
 
 ## Code of Conduct
@@ -62,6 +75,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-If you have any questions or need further assistance, feel free to open an issue or contatct me.
+If you have any questions or need further assistance, feel free to open an issue or contatct me at <souroagorouko@gmail.com>.
 
 Happy coding!
