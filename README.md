@@ -1,5 +1,11 @@
 # Laravel Auto Blade VS Code Extension
 
+![GitHub repo](https://img.shields.io/badge/laravel_auto_blade-blue)
+![GitHub forks](https://img.shields.io/github/forks/Bakugo90/laravel-auto-blade?style=social)
+![GitHub stars](https://img.shields.io/github/stars/Bakugo90/laravel-auto-blade?style=social)
+![GitHub issues](https://img.shields.io/github/issues/Bakugo90/laravel-auto-blade)
+![GitHub license](https://img.shields.io/github/license/Bakugo90/laravel-auto-blade)
+
 ## Introduction
 
 Welcome to the Laravel Auto blade VS Code Extension! This extension is designed to supercharge Laravel developer productivity by converting HTML files to Blade templates. It automatically changes all files with a `.html` extension to `.blade.php` and updates necessary content like links to asset files using Laravel's `asset()` helper function.
