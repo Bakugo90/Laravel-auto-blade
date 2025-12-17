@@ -1,23 +1,111 @@
 {
   "name": "autoblade",
-  "displayName": "autoBlade",
-  "description": "",
+  "displayName": "Laravel Auto Blade",
+  "description": "Automatically convert HTML files to Laravel Blade templates with asset helper integration",
   "version": "0.0.1",
+  "publisher": "Bakugo90",
+  "author": {
+    "name": "Bakugo90",
+    "email": "souroagorouko@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bakugo90/laravel-auto-blade"
+  },
   "engines": {
-    "vscode": "^1.95.3"
+    "vscode": "^1.107.0"
   },
   "categories": [
+    "Formatters",
     "Other"
   ],
-  "activationEvents": [],
+  "keywords": [
+    "laravel",
+    "blade",
+    "php",
+    "html",
+    "converter",
+    "template"
+  ],
+  "activationEvents": [
+    "onLanguage:html",
+    "workspaceContains:**/*.blade.php"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "autoblade.start",
-        "title": "Auto Blade"
+        "command": "autoblade.convertCurrentFile",
+        "title": "Auto Blade: Convert Current HTML File to Blade",
+        "icon": "$(symbol-file)"
+      },
+      {
+        "command": "autoblade.convertFolder",
+        "title": "Auto Blade: Convert All HTML Files in Folder",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "autoblade.convertWorkspace",
+        "title": "Auto Blade: Convert All HTML Files in Workspace",
+        "icon": "$(files)"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceExtname == .html",
+          "command": "autoblade.convertCurrentFile",
+          "group": "autoblade@1"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "autoblade.convertFolder",
+          "group": "autoblade@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceExtname == .html",
+          "command": "autoblade.convertCurrentFile",
+          "group": "autoblade@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Laravel Auto Blade",
+      "properties": {
+        "autoblade.excludePatterns": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/vendor/**",
+            "**/storage/**",
+            "**/public/**"
+          ],
+          "description": "Patterns to exclude from conversion"
+        },
+        "autoblade.createBackup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Create backup of original HTML files before conversion"
+        },
+        "autoblade.showPreview": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show preview before converting files"
+        },
+        "autoblade.assetPathPrefix": {
+          "type": "string",
+          "default": "",
+          "description": "Prefix to add to asset paths (e.g., 'resources/views/assets')"
+        },
+        "autoblade.preserveComments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Convert HTML comments to Blade comments"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -28,14 +116,13 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.95.0",
-    "@types/mocha": "^10.0.8",
-    "@types/node": "20.x",
-    "@typescript-eslint/eslint-plugin": "^8.7.0",
-    "@typescript-eslint/parser": "^8.7.0",
-    "eslint": "^9.11.1",
-    "typescript": "^5.6.2",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@types/vscode": "^1.107.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.48.1",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
   }
 }

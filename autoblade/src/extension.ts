@@ -1,41 +1,89 @@
-import * as vscode from "vscode";
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-
-  console.log('Congratulations, your extension "autoblade" is now active!');
-
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  const disposable = vscode.commands.registerCommand("autoblade.start", () => {
-    // vscode.window.showInformationMessage("Hello World from autoBlade!");
-
-    isHtml()
-      ? vscode.window.showInformationMessage("The current opened file is html")
-      : vscode.window.showErrorMessage("The current File must be html");
-  });
-
-  context.subscriptions.push(disposable);
-}
-
-// This method is called when your extension is deactivated
-export function deactivate() {}
-
 /**
- * Check if the current opened file has .html extension
- * @returns {boolean} True if the file has a .html extension, false otherwise.
+ * Laravel Auto Blade Extension
+ * 
+ * Automatically converts HTML files to Laravel Blade templates with asset helper integration
+ * 
+ * @author Bakugo90
+ * @license MIT
  */
 
-function isHtml(): boolean {
-  const editor = vscode.window.activeTextEditor;
+import * as vscode from 'vscode';
+import {
+    ConvertCurrentFileCommand,
+    ConvertFolderCommand,
+    ConvertWorkspaceCommand,
+} from './commands';
+import { logger } from './utils';
+import { COMMANDS, EXTENSION_NAME } from './constants';
 
-  if (editor) {
-    const document = editor.document;
-    const fileName = document.fileName;
-    return fileName.endsWith(".html");
-  }
+/**
+ * Extension activation entry point
+ * Called when the extension is first activated
+ */
+export function activate(context: vscode.ExtensionContext): void {
+    logger.info(`${EXTENSION_NAME} extension is now active!`);
+    
+    // Initialize command handlers
+    const convertCurrentFileCmd = new ConvertCurrentFileCommand();
+    const convertFolderCmd = new ConvertFolderCommand();
+    const convertWorkspaceCmd = new ConvertWorkspaceCommand();
+    
+    // Register commands
+    const commands = [
+        vscode.commands.registerCommand(
+            COMMANDS.CONVERT_CURRENT_FILE,
+            () => convertCurrentFileCmd.execute()
+        ),
+        vscode.commands.registerCommand(
+            COMMANDS.CONVERT_FOLDER,
+            (uri: vscode.Uri) => convertFolderCmd.execute(uri)
+        ),
+        vscode.commands.registerCommand(
+            COMMANDS.CONVERT_WORKSPACE,
+            () => convertWorkspaceCmd.execute()
+        ),
+    ];
+    
+    // Add all commands to subscriptions for proper cleanup
+    context.subscriptions.push(...commands);
+    
+    // Log successful activation
+    logger.info('All commands registered successfully');
+    
+    // Show welcome message on first activation
+    showWelcomeMessage(context);
+}
 
-  return false;
+/**
+ * Extension deactivation
+ * Called when the extension is deactivated
+ */
+export function deactivate(): void {
+    logger.info(`${EXTENSION_NAME} extension is now deactivated`);
+    logger.dispose();
+}
+
+/**
+ * Show welcome message on first activation
+ */
+function showWelcomeMessage(context: vscode.ExtensionContext): void {
+    const hasShownWelcome = context.globalState.get<boolean>('hasShownWelcome');
+    
+    if (!hasShownWelcome) {
+        vscode.window
+            .showInformationMessage(
+                `${EXTENSION_NAME} is ready! Convert HTML files to Blade templates with ease.`,
+                'Learn More',
+                'Got it'
+            )
+            .then(choice => {
+                if (choice === 'Learn More') {
+                    vscode.env.openExternal(
+                        vscode.Uri.parse('https://github.com/Bakugo90/laravel-auto-blade')
+                    );
+                }
+            });
+        
+        context.globalState.update('hasShownWelcome', true);
+    }
 }
